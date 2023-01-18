@@ -91,7 +91,7 @@ In C programming, there are 3 flux : `stdin`, `stdout` and `stderr`
 ### Normal execution 
 `stdin` => command execution => `stdout`
 - Execute a command in **background** `$ command [args] &`
-- redirect the `stdout` of command1 to the `stdin`of command2, use "Pipe character" `$ command1 | command2`
+- redirect the `stdout` of command1 to the `stdin` of command2, use "Pipe character" `$ command1 | command2`
 - research a char in a file `grep`, for example `$ grep 9 < myfile.csv`
 - display a file `cat`, for example `$ cat myfile.csv`
 

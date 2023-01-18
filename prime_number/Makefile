@@ -14,8 +14,8 @@ CC = gcc
 EXE = main
 
 # compilation flages (CFLAGS) and links edition (LDFLAGS)
-CFLAGS += -Wall `sdl2-config --cflags`
-LDFLAGS = -lm -lSDL2_ttf `sdl2-config --libs`
+CFLAGS += -Wall -O3
+LDFLAGS =
 
 # principal rule : make the executable file
 all: $(OBJ)
