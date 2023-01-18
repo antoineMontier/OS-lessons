@@ -14,8 +14,8 @@ CC = gcc
 EXE = main
 
 # compilation flages (CFLAGS) and links edition (LDFLAGS)
-CFLAGS += -Wall -O3
-LDFLAGS =
+CFLAGS += -Wall 
+LDFLAGS = -pg
 
 # principal rule : make the executable file
 all: $(OBJ)
