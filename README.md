@@ -76,6 +76,8 @@ In C programming, there are 3 flux : `stdin`, `stdout` and `stderr`
 
 # terminal commands
 
+bash = Born Again SHell
+
 ## basic terminal shortcuts
 
 - Ctrl+C : **interruption**
@@ -87,6 +89,9 @@ In C programming, there are 3 flux : `stdin`, `stdout` and `stderr`
 - Ctrl+U : **erase** the actual line
 
 ## commands
+
+- `$ whereis file` returns the path of the desired file
+- to compile a bash file, use `$ chmod 700 file_name`, then `$ ./file_name`
 
 ### Normal execution 
 `stdin` => command execution => `stdout`
@@ -109,6 +114,9 @@ In C programming, there are 3 flux : `stdin`, `stdout` and `stderr`
 - set the variable as an environment variable `$ export VAR`
 - get the value of the variable `$VAR` for example : `$ echo $VAR`
 - char variables : `$ VAR2="toto $VAR"` won't replace `$VAR` with it's value use `$ VAR2='toto $VAR'` instead
+
+### aliases
+`$ \command` will execute the original linux command even if an alias is defined
 
 ### control structures
 
@@ -148,8 +156,45 @@ when compiling a c program, the user can optimize the output executable file
 - `$ gcc -O3 -o outputfile sourcefile.c` stands for the **best** optimization
 
 
+### step by step compilation
+1. `$ gcc -c -Wall -Wextra file.c` creates an object file
+2. `$ gcc files_to_link.o -lm -o output` transform the object file into an executable file
+
+### Makefile
+`$ make` standard command to make (compile) the .c files only if they've been touched<br />
+`$ make all` standard command to compile every files even if not touched
+
+### Profiler
+looks how the code is working (function calls, memory use...). Compile with `-pg` flag.<br />Run the program once `$ ./executable_name`. Then use gprof :<br />`$ gprof executable_name gmon.out > file_output`.
+
 ### timer
 the user can know how many time an executable took by adding "time" before the executable name
 ```
 $ time ./outputfile
 ```
+
+## Function libraries
+It's a bunch of functions already compiled with `gcc -c`, the functions are in a `.o` file
+
+### static
+- the code is copied to the final executable
+- autonaumous program, no need to have another file
+- the executable is bigger, that's a bad point considering the executable is loaded in memory
+- creation : compile into **objects** ; then create the **archive**
+```
+$ gcc -c source1.c, source2.c
+$ ar -r lib<NAME>.a source1.o source2.o
+```
+
+### dynamic (DLL)
+- the code is linked (as a pointer) to the final executable
+- better gestion of the memory
+- no need to recompile the program after a verion change
+- loaded once in memory (even if multiple programs calls it)
+- creation : compile into **objects** ; then create the **archive**
+```
+$ gcc -c -fpic source1.c, source2.c
+$ gcc -shared source1.o source2.o -o lib<NAME>.so
+```
+- use : `$ gcc file.c -l<NAME> -I. -o file`
+- use : `$ gcc file.c -Wl,-rpath=/home/user/... -L/home/user/... -o file -l<NAME>`
