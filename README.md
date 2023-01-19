@@ -92,6 +92,7 @@ bash = Born Again SHell
 
 - `$ whereis file` returns the path of the desired file
 - to compile a bash file, use `$ chmod 700 file_name`, then `$ ./file_name`
+- `$ find start_point -name "file_name" <-print>` (recursive ls)
 
 ### Normal execution 
 `stdin` => command execution => `stdout`

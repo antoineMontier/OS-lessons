@@ -24,4 +24,14 @@ function total_size {
     done
     echo "executable file total bytes : $nb"
 }
-total_size
+
+#write a script to display every .c of the directory
+
+function print_c {
+    find . -name "*.c" -print
+}
+
+#write a script to delete every ~ or .bak file in the arborescence
+function rm_useless {
+    find . \( -name "*~" -o -name "*.bak" \) -exec rm {} \;     # '\' stands for despeciallisation of the parenthesis ; -o stands for OR ; {} stands for everything he found
+}
