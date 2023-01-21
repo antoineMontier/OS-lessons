@@ -15,5 +15,29 @@ check_if_one_arg_v2() {
     fi
 }
 
-check_if_one_arg_v1 $#       # $# stands for number of arguments of the function / script
-check_if_one_arg_v2 $*       # $* copy the arguments
+function clear { #clear .log and .aux files (founded from HOME : ~)
+    find /HOME -name "*.aux" -exec rm
+    find /HOME -name "*.log" -exec rm
+}
+
+ps_pdf_rm() {
+    if [ $# -ne 1 ] ; then
+        echo -e "ps_pdf_rm needs the path as an argument \n"
+        exit 1
+    fi
+    acutalPath=pwd
+    cd $1
+    rm *.pdf
+    rm *.ps
+    cd $acutalPath
+}
+
+function simpleRemove {
+    rm *.pdf
+    rm *.ps
+}
+
+function clearall { #calls clear + delete X.ps and X.pdf if X.dvi exists
+    clear
+    find /HOME -name "*.dvi" -exec simpleRemove 
+}

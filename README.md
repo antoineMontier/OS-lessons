@@ -131,6 +131,15 @@ bash = Born Again SHell
 `$ echo "5*4"` returns 5*4<br />
 `$ echo "5*4" | bc` returns 20
 
+### arguments
+the arguments of a bash function should be passed this way : `$ function arg1 arg2 arg3`.<br />
+In a bash file (`.sh`) there are two special arguments : 
+- `$#` : return the number of arguments passed to the bash script
+- `$*` : copy the arguments passed to the bash scrpit
+
+### bash execution
+You can write a bash script (`.sh` file) before the first execution, make `$ chmod 700 myfile.sh`<br />
+to execute the bash script, do this : `$ ./myfile.sh arg1 arg2...` where the arguments can be optional
 
 # C compilation
 when compiling a c program, the user can define a value.<br />
