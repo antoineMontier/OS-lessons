@@ -48,6 +48,12 @@ malloc(size) => Pointeur
 
 MMU : located on the processors (  [CPU]->[MMU]->[ RAM ]  ) the MMU is used to manage the memory
 
+### PILE 
+place where the launched code is launched (source code and variables)
+
+### TAS
+place where the mallocs are stored
+
 ## Ordonnanceur
 decides which task need to be exectuted first and how to distribute the ressources (processors / memory) between the currenct tasks
 
@@ -208,3 +214,46 @@ $ gcc -shared source1.o source2.o -o lib<NAME>.so
 ```
 - use : `$ gcc file.c -l<NAME> -I. -o file`
 - use : `$ gcc file.c -Wl,-rpath=/home/user/... -L/home/user/... -o file -l<NAME>`
+
+# Processes
+duplication process for example a calcul thread and an interactive thread finaly fetch the two threads<br />
+Each thread have :
+- state
+- PID (unique number) > know if the thread is parent or son
+- own stdout and stdin streams
+....
+
+### main process
+
+**Init** process is the main process : load the memory (RAM and SWAP), check the BIOS, CPU... load the WIFI card...<br />The following command will display all the Processes:<br />
+`$ ps f aux`
+
+## Create a process
+Using C programming, you can create a process : 
+```
+#include <unistd.h>
+
+pid_t fork;
+```
+Return values : 
+
+1. `pid_t = -1` : error
+2. `pid_t = 0` : son process
+3. `pid_t > 0` : father process (the PID is the child PID)
+
+### Advanced process options
+
+Use `vfork` for a more **precise** fork process. Use `clone` in **Linux** to fork and control every fork parameter.
+
+### End a process
+
+Use `exit()` function
+
+Return values :
+- `exit() = 0` : exit successful
+- `0 < exit() < 255` : exit failed with error code in ] 0 ; 255 ]
+
+Use `on_exit(void* f(int void*), void* arg)` or `atexit(void* function)` (less customizable) function to execute those functions at the process exit.
+<br />Use `#include <sys/wait.h>`<br /> the function `_exit()` will not call the `atexit()` and `on_exit()`
+- `wait()` wait for the process to be ended (block the execution) function will return -1 > error or > PID or the ended process
+- `waitpid()` it's not blocking the execution. Customizable version of `wait()` but other return values
