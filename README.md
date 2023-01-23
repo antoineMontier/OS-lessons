@@ -48,7 +48,7 @@ malloc(size) => Pointeur
 
 MMU : located on the processors (  [CPU]->[MMU]->[ RAM ]  ) the MMU is used to manage the memory
 
-### PILE 
+### STACK 
 place where the launched code is launched (source code and variables)
 
 ### TAS
@@ -254,6 +254,9 @@ Return values :
 - `0 < exit() < 255` : exit failed with error code in ] 0 ; 255 ]
 
 Use `on_exit(void* f(int void*), void* arg)` or `atexit(void* function)` (less customizable) function to execute those functions at the process exit.
-<br />Use `#include <sys/wait.h>`<br /> the function `_exit()` will not call the `atexit()` and `on_exit()`
+<br />Use `#include <sys/wait.h>`<br /> the function `_exit()` will not call the `atexit()` and `on_exit()`.
+
 - `wait()` wait for the process to be ended (block the execution) function will return -1 > error or > PID or the ended process
 - `waitpid()` it's not blocking the execution. Customizable version of `wait()` but other return values
+
+`abort()` function kills the process. Creates a core file to store the stack trace<br />`assert()` macro will test a condition. If false, the program will be stop. (`#include <assert.h>`). The `-NDEBUG` parameter is present in the compilation command, no asserts will be execute.
