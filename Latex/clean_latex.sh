@@ -15,9 +15,13 @@ check_if_one_arg_v2() {
     fi
 }
 
-function clear { #clear .log and .aux files (founded from HOME : ~)
+function clearf { #clear .log and .aux files (founded from HOME : ~)
     find /HOME -name "*.aux" -exec rm
     find /HOME -name "*.log" -exec rm
+}
+
+function clearf2 {
+    find $HOME \( -name "*.log"  -o -name "*.aux" \) -exec rm -f {} \; 2>dev/null #dev/null is a trash file
 }
 
 ps_pdf_rm() {
@@ -32,12 +36,19 @@ ps_pdf_rm() {
     cd $acutalPath
 }
 
-function simpleRemove {
-    rm *.pdf
-    rm *.ps
-}
+
 
 function clearall { #calls clear + delete X.ps and X.pdf if X.dvi exists
-    clear
-    find /HOME -name "*.dvi" -exec simpleRemove 
+    clearf2
+    for [ i in `find $HOME -name "*.dvi"`]
+    do
+        file_name = ${i%dvi} #parse the output
+        #to merge two strings, just write them next to another
+        if [ -f $file_name"ps" ] ; then
+            \rm -f $file_name"ps"
+        fi
+        if [ -f $file_name"pdf" ] ; then    #-f stands for find
+            \rm -f $file_name"pdf"
+        fi
+    done 
 }

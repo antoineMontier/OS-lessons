@@ -102,6 +102,9 @@ bash = Born Again SHell
 
 ### Normal execution 
 `stdin` => command execution => `stdout`
+- Output 1 is `stdin`
+- Output 2 is `stdout`
+- Output 3 is `stderr`
 - Execute a command in **background** `$ command [args] &`
 - redirect the `stdout` of command1 to the `stdin` of command2, use "Pipe character" `$ command1 | command2`
 - research a char in a file `grep`, for example `$ grep 9 < myfile.csv`
@@ -113,7 +116,8 @@ bash = Born Again SHell
 - `?` replace one char (precisely one)
 - `[a-z]` or `[xyz]` stands for one jocker char in this set
 - `~` = `HOME`
-
+- `${string%xxxx}` parse the output : `abcdxxxx > abcd`
+  
 ### Variables
 
 `env` shows all the environment variables, for example `USER` is username
