@@ -52,3 +52,26 @@ function clearall { #calls clear + delete X.ps and X.pdf if X.dvi exists
         fi
     done 
 }
+
+function zip { #calls clearall then, zip into a X.tgz file the X.tex and X.dvi
+    clearall
+    for [ i in `find $HOME -name "*.dvi"`]
+    do
+        file_name = ${i%dvi} # parse the output
+        # to merge two strings, just write them next to another
+        if [ -f $file_name"tex" ] ; then
+            tar zcf $file_name"tgz" $file_name"tex" $file_name"dvi" # or $i
+        fi
+    done 
+}
+
+#execute
+
+check_if_one_arg_v1 $#
+
+case $1 in 
+    "clear") clearf2;; # ;; means break
+    "clearall") clearall;;
+    "zip") zip;;
+    *) echo "argument error" ; exit 1;; # * is the default case 
+esac
