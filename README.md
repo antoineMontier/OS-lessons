@@ -249,7 +249,7 @@ Return values :
 
 ### Advanced process options
 
-Use `vfork` for a more **precise** fork process. Use `clone` in **Linux** to fork and control every fork parameter.
+Use `vfork` for a more **precise** fork process (no memory duplication). Use `clone` in **Linux** to fork and control every fork parameter.
 
 ### End a process
 
@@ -267,7 +267,8 @@ Use `on_exit(void* f(int void*), void* arg)` or `atexit(void* function)` (less c
 
 `abort()` function kills the process. Creates a core file to store the stack trace<br />`assert()` macro will test a condition. If false, the program will be stop. (`#include <assert.h>`). The `-NDEBUG` parameter is present in the compilation command, no asserts will be execute.
 
-#### sleep functions
-two main functions included in `<unistd.h>` 
-- `sleep()` sleeps for a specified amount of time in Seconds
-- `usleep()` sleeps for a specified amount of time microSeconds
+#### unistd functions
+functions included in `<unistd.h>` 
+- `sleep(int)` sleeps for a specified amount of time in Seconds
+- `usleep(int)` sleeps for a specified amount of time microSeconds
+- `getenv(char*)` gets the env value for the specified variable
