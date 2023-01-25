@@ -21,7 +21,7 @@ function clearf { #clear .log and .aux files (founded from HOME : ~)
 }
 
 function clearf2 {
-    find $HOME \( -name "*.log"  -o -name "*.aux" \) -exec rm -f {} \; 2>dev/null #dev/null is a trash file
+    find $HOME \( -name "*.log"  -o -name "*.aux" \) -exec rm -f {} \; 2>/dev/null #dev/null is a trash file
 }
 
 ps_pdf_rm() {
@@ -40,7 +40,7 @@ ps_pdf_rm() {
 
 function clearall { #calls clear + delete X.ps and X.pdf if X.dvi exists
     clearf2
-    for [ i in `find $HOME -name "*.dvi"`]
+    for [i in `find $HOME -name "*.dvi"`]
     do
         file_name = ${i%dvi} #parse the output
         #to merge two strings, just write them next to another
@@ -55,7 +55,7 @@ function clearall { #calls clear + delete X.ps and X.pdf if X.dvi exists
 
 function zip { #calls clearall then, zip into a X.tgz file the X.tex and X.dvi
     clearall
-    for [ i in `find $HOME -name "*.dvi"`]
+    for [i in `find $HOME -name "*.dvi"`]
     do
         file_name = ${i%dvi} # parse the output
         # to merge two strings, just write them next to another

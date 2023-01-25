@@ -229,8 +229,10 @@ Each thread have :
 
 ### main process
 
-**Init** process is the main process : load the memory (RAM and SWAP), check the BIOS, CPU... load the WIFI card...<br />The following command will display all the Processes:<br />
-`$ ps f aux`
+**Init** process is the main process : load the memory (RAM and SWAP), check the BIOS, CPU... load the WIFI card...<br />The following command will display all the Processes:
+- `$ ps f aux`
+- use `$ ps f aux | grep <name>` to search a specific process
+The pid of a process can be know with `getpid()` : int ; the father of the process is `getpspid()` : int
 
 ## Create a process
 Using C programming, you can create a process : 
@@ -264,3 +266,8 @@ Use `on_exit(void* f(int void*), void* arg)` or `atexit(void* function)` (less c
 - `waitpid()` it's not blocking the execution. Customizable version of `wait()` but other return values
 
 `abort()` function kills the process. Creates a core file to store the stack trace<br />`assert()` macro will test a condition. If false, the program will be stop. (`#include <assert.h>`). The `-NDEBUG` parameter is present in the compilation command, no asserts will be execute.
+
+#### sleep functions
+two main functions included in `<unistd.h>` 
+- `sleep()` sleeps for a specified amount of time in Seconds
+- `usleep()` sleeps for a specified amount of time microSeconds
