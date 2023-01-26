@@ -7,9 +7,7 @@ void forking(int nb);
 
 int main(){
 
-    forking(5);
-
-    sleep(4);
+    forking(4);
     return 0;
 }
 
