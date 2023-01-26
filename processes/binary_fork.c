@@ -4,13 +4,28 @@
 #include <sys/wait.h>
 
 void binary_forking_rec(int nb);
+void binary_forking_it(int nb);
+
 
 int main(){//gcc -c binary_fork.c && gcc -o binary_fork binary_fork.o && ./binary_fork
 
 
-    binary_forking_rec(3);
+    binary_forking_it(3);
     return 0;
 }
+
+void binary_forking_it(int nb){
+    printf("Init : <<<%d>>>\n", getpid());
+    for(int i=0; i<nb; i++){
+        if(fork() && fork()){
+            printf("%d >> %d\n", getppid(), getpid());
+            wait(NULL);
+            wait(NULL);
+            exit(0);
+        }
+    }
+}
+
 
 void binary_forking_rec(int nb){
     if(nb <= 0) return;
