@@ -159,7 +159,7 @@ $ gcc -D MYDEFINE=value -D MYDEFINE2=value2 -o outputfile sourcefile.c
 ```
 
 `sourcefile.c` might starts with
-```
+```C
 #ifndef MYDEFINE
     #define MYDEFINE init
 #endif
@@ -236,12 +236,13 @@ The pid of a process can be know with `getpid()` : int ; the father of the proce
 
 ## Create a process
 Using C programming, you can create a process : 
-```
+```C
 #include <unistd.h>
 
-pid_t fork;
+pid_t myPid = fork();
 ```
-Return values : 
+
+the fork created will read the code the same way as the parent process, the only difference will be the pid value : 
 
 1. `pid_t = -1` : error
 2. `pid_t = 0` : son process
@@ -272,3 +273,59 @@ functions included in `<unistd.h>`
 - `sleep(int)` sleeps for a specified amount of time in Seconds
 - `usleep(int)` sleeps for a specified amount of time microSeconds
 - `getenv(char*)` gets the env value for the specified variable
+- `getgid()` get the gid of a process group
+- `setgid(int)` set the gid of a process group
+
+### error handling
+
+get the error code : 
+
+```C
+#include <erno.h>
+extern int errno;
+```
+
+displays the error message with `perror("fork")`
+
+
+### Ressource 
+
+Know about the Ressource disponibility : 
+
+```C
+#include <sys/resource.h>
+int getrusage(int who, struct rusage *usage);
+```
+`who` can be : `RUSAGE_CHILDREN` or `RUSAGE_SELF`
+
+Set the ressource limit : 
+
+```C
+int setrlimit (int ressource, const struct rlimit∗rlim)
+```
+
+
+Know about the time took by a process : 
+
+```C
+#include <sys/times.h>
+clock_t times (struct tms∗ temps);
+```
+
+
+### Execute a program 
+
+```C
+#include <unistd.h>
+int execve (const char∗ prog, const char∗∗ argv, const char∗∗ env) // program title, program arguments and program environment variables
+int execv (const char∗ prog, const char∗∗ argv) // same as above but without environment variables
+```
+other executions functions exists.
+No code will be executed after the exec functions
+
+```C
+#include <stdlib.h>
+int system(const char* command);
+```
+
+The code after the system function will be executed
