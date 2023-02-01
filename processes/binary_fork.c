@@ -34,12 +34,12 @@ int binary_forking_rec(int nb, pid_t parent_pid){ // the number of processes wil
 
         int n, m;
         wait(&n);
-        n = WEXITSTATUS(n);
+        n = WEXITSTATUS(n); // takes the 8 bit inside of a 32-bit in this position : - - 8 -  +  applies the locigal & with 0000 0000
         wait(&m);
         m = WEXITSTATUS(m);
-        //printf("%d\n", n+m);
+        // printf("%d\n", n+m);
         if(getpid() == parent_pid)
-            return n+m;
+            return n+m-1;
         else
             exit(n+m);
     }
