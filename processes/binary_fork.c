@@ -3,16 +3,13 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-void binary_forking_rec(int nb, int*nb_process);
+int binary_forking_rec(int nb, pid_t parent_pid);
 void binary_forking_it(int nb);
 
 
 int main(){//gcc -c binary_fork.c && gcc -o binary_fork binary_fork.o && ./binary_fork
 
-    int n = 0;
-    binary_forking_rec(3, &n);
-
-    printf("%d\n", n);
+    printf("%d\n", binary_forking_rec(5, getpid()));
     return 0;
 }
 
@@ -29,7 +26,7 @@ void binary_forking_it(int nb){
 }
 
 
-void binary_forking_rec(int nb, int*nb_process){ // the number of processes will be 2^{nb+1} - 1
+int binary_forking_rec(int nb, pid_t parent_pid){ // the number of processes will be 2^{nb+1} - 1
     if(nb <= 0) exit(1); // leaf    
     pid_t son1_pid, son2_pid;
     if(      (son1_pid = fork())     &&     (son2_pid = fork())    ){//father
@@ -40,9 +37,11 @@ void binary_forking_rec(int nb, int*nb_process){ // the number of processes will
         n = WEXITSTATUS(n);
         wait(&m);
         m = WEXITSTATUS(m);
-        *nb_process = n+m;
-        printf("%d\n", n+m);
-        exit(n+m);
+        //printf("%d\n", n+m);
+        if(getpid() == parent_pid)
+            return n+m;
+        else
+            exit(n+m);
     }
-    binary_forking_rec(nb-1, nb_process);
+    binary_forking_rec(nb-1, parent_pid);
 }
