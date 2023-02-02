@@ -319,6 +319,7 @@ clock_t times (struct tms∗ temps);
 #include <unistd.h>
 int execve (const char∗ prog, const char∗∗ argv, const char∗∗ env) // program title, program arguments and program environment variables
 int execv (const char∗ prog, const char∗∗ argv) // same as above but without environment variables
+int execl (const char* path, const char* prog, argv[1], argv[2]...);
 ```
 other executions functions exists.
 No code will be executed after the exec functions
@@ -329,3 +330,8 @@ int system(const char* command);
 ```
 
 The code after the system function will be executed
+
+
+## communication between processes
+
+the return of a `main()` is like an `exit()`
