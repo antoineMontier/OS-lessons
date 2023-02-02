@@ -180,6 +180,10 @@ when compiling a c program, the user can optimize the output executable file
 1. `$ gcc -c -Wall -Wextra file.c` creates an object file
 2. `$ gcc files_to_link.o -lm -o output` transform the object file into an executable file
 
+### quick compilation
+
+`$ gcc file.c -o output`
+
 ### Makefile
 `$ make` standard command to make (compile) the .c files only if they've been touched<br />
 `$ make all` standard command to compile every files even if not touched
@@ -319,7 +323,7 @@ clock_t times (struct tms∗ temps);
 #include <unistd.h>
 int execve (const char∗ prog, const char∗∗ argv, const char∗∗ env) // program title, program arguments and program environment variables
 int execv (const char∗ prog, const char∗∗ argv) // same as above but without environment variables
-int execl (const char* path, const char* prog, argv[1], argv[2]...);
+int execl (const char* path, const char* prog, argv[1], argv[2]...); // last arg needs to be NULL
 ```
 other executions functions exists.
 No code will be executed after the exec functions
@@ -335,3 +339,12 @@ The code after the system function will be executed
 ## communication between processes
 
 the return of a `main()` is like an `exit()`
+
+from a parent code, you can find the returned value with the `wait(int*)` function, this function returns a 32-bit integer. To transform it into a 8-bit integer, you can use the macro `WEXITSTATUS(int)`. this is an example :
+
+```C
+int n = -1;
+wait(&n);
+n = WEXITSTATUS(n);
+printf("return value: %d\n", n);
+```
