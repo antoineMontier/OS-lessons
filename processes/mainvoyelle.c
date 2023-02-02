@@ -37,7 +37,7 @@ char Voyelle(char *nomFlux){
 
 int main(int argc, char **argv){
     if (argc == 2)
-        return(Voyelle(argv[1]));
+        return (Voyelle(argv[1]));
     else
         fprintf(stderr, "no file to explore\n");
     return 0;
