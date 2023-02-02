@@ -14,21 +14,26 @@ int main(int argc, char **argv)
     pid_t parent = getpid();
 
     for (int i = 1; i < argc; i++)
-    {
-        if (getpid() == parent)
-        {
-            if (fork() > 0)
-            { // father
-                int frequent_voyelle;
-                wait(&frequent_voyelle);
-                frequent_voyelle = WEXITSTATUS(frequent_voyelle);
-                printf("most frequent voyelle of %s = %c\n", argv[i],  frequent_voyelle);
-            }else{ // son
+        if (getpid() == parent && fork() == 0)
                 Voyelle(argv[i]);
-            }
+
+    if(getpid() == parent)
+        for(int i = 1 ; i < argc ; i++){
+            int n = 0;
+            wait(&n);
+            n = WEXITSTATUS(n);
+            printf("most used voyelle in %s is %c\n", argv[i], n);
         }
-    }
+
 }
+
+
+
+
+
+
+
+
 
 void Voyelle(char *nomFlux)
 {
