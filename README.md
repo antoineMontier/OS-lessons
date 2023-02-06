@@ -373,3 +373,15 @@ if(a == 0)
 else if(a > 0)
     printf("error with code: %d\n", a);
 ```
+
+### End a thread
+
+We end it the same way as the fork, with a return value.
+`void pthread_exit(void* thread_result);`
+If no return, return `NULL`. Otherwise cast return into `void*`.
+
+### Wait for a thread to complete
+
+```C
+int pthread_join(pthread_t thread, void** thread_result_byAdress);
+```
