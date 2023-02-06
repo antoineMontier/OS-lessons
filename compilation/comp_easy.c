@@ -65,7 +65,8 @@ int main(int argc, char **argv){
 
     check_logs();
 
-
+    free(command);
+    return 0;
 
     
 }

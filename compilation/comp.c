@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <ctype.h>
+#define BUFFER_SIZE 1024
 
 int main(int argc, char**argv){
 
@@ -10,19 +11,16 @@ int main(int argc, char**argv){
         printf("Use the compilation program this way : %s source1.c, source2.c...\n", argv[0]);
         return 0;
     }
+    char*command = malloc(sizeof(char)*BUFFER_SIZE);
 
     for(int i=1; i<argc; i++){
-        if(!fork()){
-            char *args[] = {"./comp_easy", argv[i], NULL};
-            char *environ[] = { NULL };
-            execve("./comp_easy", args, environ);
-        }
+        for(int j=0; j<BUFFER_SIZE; j++)
+            command[j] = '\0';
+        strcat(command, "./comp_easy ");
+        strcat(command, argv[i]);
+        system(command);
     }
 
-    for(int i=1; i<argc; i++){
-        wait(NULL);
-    }
-    
 
     return 0;
 }
