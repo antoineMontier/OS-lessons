@@ -326,7 +326,6 @@ execve ("./myprog", {"./myprog", "arg1", "arg2", NULL}, "environment_variables")
 int execv (const char∗ prog, const char∗∗ argv) // same as above but without environment variables
 int execl (const char* path, const char* prog, argv[1], argv[2]...); // last arg needs to be NULL
 ```
-other executions functions exists.
 No code will be executed after the exec functions
 
 ```C
@@ -350,6 +349,27 @@ n = WEXITSTATUS(n);
 printf("return value: %d\n", n);
 ```
 
-
-
 # Thread
+A processor is multi-thread if it can handle at least two independant control flows. A thread can cut an application into multiple activities to run the part separately. It improve the processor usage. More work done every second. Programmation is easier because of the thread logic.
+
+A thread is the same process (same PID) But each execute different code. The storage space is share between threads. If we change a variable in one thread, it will be change in all other threads.
+
+It is possible to lock a variable inside of a thread.
+
+In java, to use threads, we have to extends our personnal class with the thread class.
+
+### Compilate a thread program
+use this command : 
+`$ gcc-D_REENTRANT -lpthread`
+
+### Create a new thread
+
+```C
+#include <pthread.h>
+
+int a = pthread_create(pthread_t *thread, pthread_attr_t *attr, void* (*function_to_execute) (void* arg), void *arg);
+if(a == 0)
+    printf("sucess\n");
+else if(a > 0)
+    printf("error with code: %d\n", a);
+```
