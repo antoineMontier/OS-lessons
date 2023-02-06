@@ -322,6 +322,7 @@ clock_t times (struct tms∗ temps);
 ```C
 #include <unistd.h>
 int execve (const char∗ prog, const char∗∗ argv, const char∗∗ env) // program title, program arguments and program environment variables
+execve ("./myprog", {"./myprog", "arg1", "arg2", NULL}, "environment_variables");
 int execv (const char∗ prog, const char∗∗ argv) // same as above but without environment variables
 int execl (const char* path, const char* prog, argv[1], argv[2]...); // last arg needs to be NULL
 ```
@@ -348,3 +349,7 @@ wait(&n);
 n = WEXITSTATUS(n);
 printf("return value: %d\n", n);
 ```
+
+
+
+# Thread
