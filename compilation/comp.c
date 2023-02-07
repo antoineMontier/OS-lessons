@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <ctype.h>
+#include <string.h>
 #define BUFFER_SIZE 1024
 
 int main(int argc, char**argv){

@@ -28,9 +28,9 @@ int main(int argc, char **argv){
 
 
 
-    printf("%s\n", command);
+    //printf("%s\n", command);
     system(command);
-    // check the object result
+    // check the result
 
     check_logs();
 
@@ -38,9 +38,9 @@ int main(int argc, char **argv){
 
 
     //let's do the second command (-o)
-    for(int i=0; i<BUFFER_SIZE; i++){
+    for(int i=0; i<BUFFER_SIZE; i++)
         command[i] = '\0';
-    }
+
     command[0] = 'g';
     command[1] = 'c';
     command[2] = 'c';
@@ -51,7 +51,6 @@ int main(int argc, char **argv){
     strcat(command, argv[1]);
     command[strlen(command)-1] = '\0'; // remove '.'
     command[strlen(command)-1] = '\0'; // remove 'c'
-    printf("%s\n", command);
 
     command[strlen(command)] = ' ';
     strcat(command, argv[1]); 
@@ -59,11 +58,21 @@ int main(int argc, char **argv){
     strcat(command, " > log.txt");
 
     //run the command
-    printf("%s\n", command);
-
     system(command);
 
     check_logs();
+
+    //now  let's remove the .o files
+    for(int i=0; i<BUFFER_SIZE; i++)
+        command[i] = '\0';
+    
+    strcat(command, "rm log.txt "); 
+    strcat(command, argv[1]); 
+    command[strlen(command) - 1] = 'o';
+
+    //run the command
+    system(command);
+
 
     free(command);
     return 0;
@@ -86,6 +95,7 @@ void check_logs(){
         exit(-1);
     }
 
-    printf("command suceeded\n");
+    //printf("command suceeded\n");
+
     fclose(f);
 }
