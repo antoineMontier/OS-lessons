@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-void* calculate(void*);
+void calculate(void);
 
-void* calculate(void*){
+void calculate(void){
     int k;
     do{k = rand();}while(k != RAND_MAX-1);
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
     /*
     One call : 
 
@@ -24,16 +24,14 @@ void* calculate(void*){
     */
 }
 
-int main(){
-    pthread_t my_thread;
-    int a = pthread_create(&my_thread, NULL, &calculate, NULL);
+int main(){ // compile with gcc -pthread calcul.c -o calcul
+
+    pthread_t tid;
+    int a = pthread_create(&tid, NULL, (void *)calculate, NULL);
     if(a == 0)
         printf("sucess\n");
     else if(a > 0)
         printf("error with code: %d\n", a);
-
-
-    
-    calculate(NULL);
+        
     return 0;
 }
