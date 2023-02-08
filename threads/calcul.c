@@ -5,8 +5,7 @@
 void calculate(void);
 
 void calculate(void){
-    int k;
-    do{k = rand();}while(k != RAND_MAX-1);
+    for(long int i = 0 ; i < 2000000000 ; ++i);
     //pthread_exit(NULL);
     /*
     One call : 
@@ -26,12 +25,37 @@ void calculate(void){
 
 int main(){ // compile with gcc -pthread calcul.c -o calcul
 
-    pthread_t tid;
-    int a = pthread_create(&tid, NULL, (void *)calculate, NULL);
+    pthread_t tid1, tid2;
+    int a, b;
+    // -- launch first thread --
+    a = pthread_create(&tid1, NULL, (void *)calculate, NULL);
     if(a == 0)
-        printf("sucess\n");
+        printf("thread opened with sucess\n");
     else if(a > 0)
-        printf("error with code: %d\n", a);
-        
+        printf("error opening with code: %d\n", a);
+
+    // -- launch second thread --
+    a = pthread_create(&tid2, NULL, (void *)calculate, NULL);
+    if(a == 0)
+        printf("thread opened with sucess\n");
+    else if(a > 0)
+        printf("error opening with code: %d\n", a);
+
+    // =================================== RUNNING =================================
+
+    // -- end first thread --
+    b = pthread_join(tid1, NULL);
+    if(b == 0)
+        printf("thread closed with sucess\n");
+    else if(b > 0)
+        printf("error closing with code: %d\n", b);
+
+    // -- end second thread --
+    b = pthread_join(tid2, NULL);
+    if(b == 0)
+        printf("thread closed with sucess\n");
+    else if(b > 0)
+        printf("error closing with code: %d\n", b);
+
     return 0;
 }

@@ -385,3 +385,5 @@ If no return, return `NULL`. Otherwise cast return into `void*`.
 ```C
 int pthread_join(pthread_t thread, void** thread_result_byAdress);
 ```
+
+If you doesn't wait, the thread will end when the main program exits, the thread might not have completed its task.
