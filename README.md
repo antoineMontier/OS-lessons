@@ -387,3 +387,6 @@ int pthread_join(pthread_t thread, void** thread_result_byAdress);
 ```
 
 If you doesn't wait, the thread will end when the main program exits, the thread might not have completed its task.
+
+## MUTEX
+Mutual Exclusion. the goal is to block a thread until another thread is finished. For example, if you increment simultaneously **two** or more threads to increment a variable, this variable will be incremented **once**. With a **mutex**, the variable incrementation will be performed one by one, allowing only one thread at time to increment the variable.
