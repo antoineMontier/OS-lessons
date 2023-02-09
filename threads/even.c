@@ -3,12 +3,14 @@
 #include <pthread.h>
 #include <unistd.h>
 
+#define NUMBER 1000
+
 int i;
 
 
 void even(){
     int last;
-    while(i < 1000){
+    while(i < NUMBER){
         if(last != i && !(i % 2)){
             printf("even %d\n", i);
             last = i;
@@ -19,7 +21,7 @@ void even(){
 
 void odd(){
     int last;
-    while(i < 1000){
+    while(i < NUMBER){
         if(last != i && (i % 2)){
             printf("odd %d\n", i);
             last = i;
@@ -35,7 +37,7 @@ int main(){ // compile with gcc -pthread even.c -o even
     pthread_create(&odd_t, NULL, (void*)odd, NULL);
 
 
-    for(i = 0 ; i < 1000 ; i++){usleep(1);}
+    for(i = 0 ; i < NUMBER ; i++){usleep(1);}
 
 
     pthread_join(even_t, NULL);
