@@ -8,11 +8,13 @@
 int **mat;
 
 void count(int col){
-    int res = 0;
+    int* res = malloc(sizeof(int));
+    *res = 0;
     for(int i=0; i<TAILLE; i++)
         if(mat[col][i] == 0)
-            res++;
-    pthread_exit(res);
+            (*res)++;
+    printf("col = %d, res = %d\n", col, *res);
+    pthread_exit((void *)res);
 }
 
 int main(){
@@ -40,17 +42,20 @@ int main(){
 
         int a, b;
         for(int j = i; j < nb_tests ; j++){
-            a = pthread_create(tids + i, NULL, (void *)count, j);
+            int col_now = j;
+            a = pthread_create(tids + i, NULL, (void *)count, &col_now);
         }
 
 
         // =================================== RUNNING =================================
 
-
+        printf("before cuting threads\n");
         for(int j = i; j < nb_tests ; j++){
             int *p;
-            b = pthread_join(tids[j], &p);
+            b = pthread_join(tids[j], (void **)&p);
+            printf("j=%d b=%d \n*p=%d\n", j, b, *p);
             total_z += *p;
+            free(p);
         }
         printf("i = %d\n", i);
     }
