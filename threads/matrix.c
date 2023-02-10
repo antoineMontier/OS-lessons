@@ -11,6 +11,7 @@ void count(void* col){
     //printf("starting count with col=%d\n", (int)col);
     int* res = malloc(sizeof(int));
     *res = 0;
+    if((int)col >= TAILLE) pthread_exit((void *)res);
     //printf("malloc ok\n");
     for(int i=0; i<TAILLE; i++)
         if(mat[(int)col][i] == 0)
@@ -31,20 +32,16 @@ int main(){
         for (int j=0; j<TAILLE; ++j) 
             mat[i][j] = rand() % 5;
 
-    int total_z = 0;
+    int *total_z = malloc(sizeof(int));
+    *total_z = 0;
 
-
-    int i = 0, nb_tests;
+    int nb_tests;
     pthread_t tids[NB_THREAD];
 
-    while(i < TAILLE){
-        if(i > TAILLE - NB_THREAD)
-            nb_tests = TAILLE - i;
-        else 
-            nb_tests = NB_THREAD;
+    for(int i = 0 ; i < TAILLE ; i+=6){
 
         int a, b;
-        for(int j = i; j < nb_tests ; j++){
+        for(int j = 0; j < 6 ; j++){
             int col_now = j;
             //printf("giving a thread the col value of %d\n", col_now);
             a = pthread_create(tids + j, NULL, (void *)count, (void*)col_now);
@@ -57,20 +54,19 @@ int main(){
 
         // =================================== RUNNING ===================================
 
+
         //printf("before cuting threads\n");
-        for(int j = i; j < nb_tests ; j++){
+        for(int j = 0; j < 6 ; j++){
             int *p;
             b = pthread_join(tids[j], (void **)&p);
-            printf("j=%d b=%d \n*p=%d\n", j, b, *p);
-            total_z += *p;
+            *total_z = *total_z + *p;
             free(p);
         }
-        printf("i = %d\n", i);
-        i+=nb_tests;
+        //printf("i = %d \t%d\n", i, *total_z);
     }
 
-    printf("final value: %d\n", total_z); // finale value is not 2*BILION because the thread are working simultaneously
-
+    printf("final value: %d\n", *total_z);
+    free(total_z);
     return 0;
 
 }
