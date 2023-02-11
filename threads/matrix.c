@@ -59,6 +59,11 @@ int main(){
         for(int j = 0; j < 6 ; j++){
             int *p;
             b = pthread_join(tids[j], (void **)&p);
+            if(b > 0){
+                printf("error at closing thread n°%d - code: %d\n", i, b);
+                free(p);
+                exit(1);
+            }
             *total_z = *total_z + *p;
             free(p);
         }

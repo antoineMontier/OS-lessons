@@ -15,12 +15,15 @@ int main(int argc, char**argv){
     char*command = malloc(sizeof(char)*BUFFER_SIZE);
 
     for(int i=1; i<argc; i++){
-        for(int j=0; j<BUFFER_SIZE; j++)
-            command[j] = '\0';
-        strcat(command, "./comp_easy ");
-        strcat(command, argv[i]);
-        system(command);
+        if(fork())
+            for(int j=0; j<BUFFER_SIZE; j++)
+                command[j] = '\0';
+            strcat(command, "./comp_easy ");
+            strcat(command, argv[i]);
+            system(command);
     }
+    for(int i=1; i<argc; i++)
+        wait(NULL);
 
     free(command);
 
