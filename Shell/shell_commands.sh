@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 
-#write a script to count the number of executable files in the current directory
+#write a script to count the number executable files in the current directory
 function nb_execution {
     nb=0
     for i in `ls`; do
@@ -35,3 +35,5 @@ function print_c {
 function rm_useless {
     find . \( -name "*~" -o -name "*.bak" \) -exec rm {} \;     # '\' stands for despeciallisation of the parenthesis ; -o stands for OR ; {} stands for everything he found
 }
+
+nb_execution

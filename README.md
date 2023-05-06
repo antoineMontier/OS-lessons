@@ -146,9 +146,22 @@ In a bash file (`.sh`) there are two special arguments :
 - `$#` : return the number of arguments passed to the bash script
 - `$*` : copy the arguments passed to the bash scrpit
 
+## bash script
+
 ### bash execution
 You can write a bash script (`.sh` file) before the first execution, make `$ chmod 700 myfile.sh`<br />
 to execute the bash script, do this : `$ ./myfile.sh arg1 arg2...` where the arguments can be optional
+
+### bash script writing
+to declare a variable, don't use a `$`. to access a variable, use a `$`
+```sh
+nb=0
+nb=$[$nb + 1]
+```
+
+`-o` stands for **OR**
+`-a` stands for **AND** 
+
 
 # C compilation
 when compiling a c program, the user can define a value.<br />
