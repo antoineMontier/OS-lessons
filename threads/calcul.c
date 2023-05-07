@@ -38,7 +38,7 @@ int main(){ // compile with gcc -pthread calcul.c -o calcul
     }
 
 
-    // =================================== RUNNING =================================
+    // =================================== RUNNING ===================================
 
     for(int i = 0; i < NB_THREADS ; i++){
         b = pthread_join(tids[i], NULL);
