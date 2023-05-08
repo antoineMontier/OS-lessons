@@ -153,6 +153,8 @@ You can write a bash script (`.sh` file) before the first execution, make `$ chm
 to execute the bash script, do this : `$ ./myfile.sh arg1 arg2...` where the arguments can be optional
 
 ### bash script writing
+Top of the script must be : `#!/bin/bash`
+
 to declare a variable, don't use a `$`. to access a variable, use a `$`
 ```sh
 nb=0
