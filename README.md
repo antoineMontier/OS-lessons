@@ -164,6 +164,32 @@ nb=$[$nb + 1]
 `-o` stands for **OR**
 `-a` stands for **AND** 
 
+### `"` vs `'`
+when the `"` is more **intelligent** than `'`. In fact, consider the following program :
+```sh
+#!/bin/bash
+
+myVar=15
+echo $myVar # =================== prints 15
+echo "value of myVar $myVar"    # prints value of myVar 15
+echo 'value of myVar $myVar'    # prints value of myVar $myVar
+```
+
+### Math 
+It is possible to do some calculations with bash : 
+- `expr` function
+- `bc` function
+
+```sh
+#!/bin/bash
+
+expr 15 / 2 # ======== echo 7
+expr 2 * 10 # ======== echo 20
+echo "4 / 3" | bc # == echo 1
+echo "4 / 3" | bc -l # echo 1.333333333333, -l stands for long number
+```
+
+We can easily understand that `"` is replacing variables with their value whereas `'` is interpreting them as strings.
 
 # C compilation
 when compiling a c program, the user can define a value.<br />
