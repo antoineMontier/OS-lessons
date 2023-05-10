@@ -55,4 +55,27 @@ function delete_o {
     done
 }
 
-delete_o
+# function that counts number of executable files in the directory
+function exec_count {
+    file_list=`ls`
+    nb=0
+    for i in $file_list; do
+        if [ -x $i ] ; then
+            nb=$(expr $nb \+ 1)
+        fi
+    done
+    echo $nb
+}
+
+# function that counts number of directories in a directory
+function dir_count {
+    file_list=`ls`
+    nb=0
+    for i in $file_list ; do
+        if ! [ -f $i ] ; then
+            nb=$(expr $nb \+ 1)
+        fi
+    done
+    echo $nb
+}
+

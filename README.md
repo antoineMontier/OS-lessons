@@ -191,6 +191,32 @@ echo "4 / 3" | bc -l # echo 1.333333333333, -l stands for long number
 
 We can easily understand that `"` is replacing variables with their value whereas `'` is interpreting them as strings.
 
+### Tests
+Tests can be done using bash. For example, we can test a file/directory with the following commands : 
+**each command will be false if the file/directory does not exist**
+- `-e file` exists (only)
+- `-d file` is a directory
+- `-r file` is readable
+- `-w file` is writable
+- `-s file` size greater than 0
+- `-x file` is executable
+- `-f file` is a file
+
+Example of use : 
+```sh
+# function that counts number of executable files in the directory
+function exec_count {
+    file_list=`ls`
+    nb=0
+    for i in $file_list; do
+        if [ -x $i -a -f $i ] ; then
+            nb=$(expr $nb \+ 1)
+        fi
+    done
+    echo $nb
+}
+```
+
 # C compilation
 when compiling a c program, the user can define a value.<br />
 for example :
