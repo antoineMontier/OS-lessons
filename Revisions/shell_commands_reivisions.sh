@@ -26,7 +26,33 @@ function fibo_string {
     echo "fibo($1) = $nb"
 }
 
-for ((i=0 ; i<20 ; i++))
-do
-    fibo_string $i
-done
+function factorial {
+    if(($# != 1)) ; then
+        echo "provide 1 argument for factorial function"
+    elif (($1 <= 1)) ; then
+        echo 1
+    else
+        echo $(expr $1 \* $(factorial $(expr $1 \- 1)))
+    fi
+}
+
+function factorials {
+    for((i=0 ; i\<11 ; i++)) ; do 
+        nb=$(factorial $i)
+        echo "$i! = $nb"
+    done
+}
+
+# delete .o files if .c files exist
+function delete_o {
+    for file_o in $(find . -name "*.o") ; do
+        for file_c in $(find . -name "*.c") ; do
+            echo "file_o = $file_o  file_c = $file_c"
+            if [ "$(basename "$file_o" .o)" == "$(basename "$file_c" .c)" ] ; then
+                exec rm $file_o
+            fi
+        done 
+    done
+}
+
+delete_o
