@@ -218,7 +218,7 @@ echo $nb
 # C compilation
 when compiling a c program, the user can define a value.<br />
 for example :
-```
+```sh
 $ gcc -D MYDEFINE=value -D MYDEFINE2=value2 -o outputfile sourcefile.c
 ```
 
@@ -257,9 +257,34 @@ looks how the code is working (function calls, memory use...). Compile with `-pg
 
 ### timer
 the user can know how many time an executable took by adding "time" before the executable name
-```
+```sh
 $ time ./outputfile
 ```
+
+### C executable arguments
+A C program can handle multiple arguments it's the same logic as bash executables.
+Consider the following example : 
+```C
+#include <stdio.h>
+
+int main(int argc, char**argv){
+
+    printf("argc = %d\n", argc); // ============== argc stands for the number of arguments
+    for(int i = 0; i < argc; i++)
+        printf("argv[%d] = %s\n", i, argv[i]);  // argv[i] is the i-th argument
+
+    return 0;
+}
+```
+You can pass arguments this way : 
+`$ ./executable_c_program arg1 arg2 arg3`
+with the above execution example, `argc` will be **4**, 
+- `argv[0]` = `./executable_c_program`
+- `argv[1]` = `arg1`
+- `argv[2]` = `arg2`
+- `argv[3]` = `arg3`
+
+A C program always have at least one argument : `argv[0]` which is the program's name.
 
 ## Function libraries
 It's a bunch of functions already compiled with `gcc -c`, the functions are in a `.o` file
@@ -269,7 +294,7 @@ It's a bunch of functions already compiled with `gcc -c`, the functions are in a
 - autonaumous program, no need to have another file
 - the executable is bigger, that's a bad point considering the executable is loaded in memory
 - creation : compile into **objects** ; then create the **archive**
-```
+```sh
 $ gcc -c source1.c, source2.c
 $ ar -r lib<NAME>.a source1.o source2.o
 ```
@@ -438,6 +463,44 @@ else if(a > 0)
     printf("error with code: %d\n", a);
 ```
 
+### Threads arguments
+The argument field inside the `pthread_create()` function is a `void*` pointer. It's the way of using **generic** variables in C. If you need to pass more than one argument to a thread, you can create a **struct** with all the arguments you need. Here's an example : 
+```C
+#include <pthread.h>
+#include <stdio.h>
+
+typedef struct {
+    char * title;
+    double coefficient;
+} my_args;
+
+void thread_function(void* arg);
+
+int main(){
+    my_args thread_args = {"basic title", -3.6};
+    pthread_t id;
+    if(pthread_create(&id, NULL, (void*)thread_function, (void*)&thread_args) == 0) printf("thread launch succeeded\n"); 
+    else printf("thread launch failed\n");
+
+    my_args * result;
+    if(pthread_join(id, (void**)&result) == 0) printf("thread closed with sucess\n");
+    else printf("thread closing failed\n");
+    result = (my_args*)result; // cast
+    printf("title = %s coefficient = %f\n", result->title, result->coefficient); // prints the modified value of the coefficient
+    return 0;
+}
+
+void thread_function(void* arg){
+    my_args * args = (my_args*)arg; // cast from void* to my_args* type
+    // === display
+    printf("Thread: title = \"%s\" coefficient = %f\n", args->title, args->coefficient); // prints the original value of the coefficient
+    // === modify content
+    args->coefficient *= 0.1; 
+    pthread_exit((void*)args);
+}
+```
+
+
 ### End a thread
 
 We end it the same way as the fork, with a return value.
@@ -455,3 +518,45 @@ If you doesn't wait, the thread will end when the main program exits, the thread
 ## MUTEX
 
 Mutual Exclusion. the goal is to block a thread until another thread is finished. For example, if you increment simultaneously **two** or more threads to increment a variable, this variable will be incremented **once**. With a **mutex**, the variable incrementation will be performed one by one, allowing only one thread at time to increment the variable.
+
+Here's an example of mutex use : 
+```C
+#include <pthread.h>
+#define NB_THREAD 2
+#define LIMIT 10
+
+// global variables
+int x;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void increase(){
+    for(int i = 0; i < LIMIT; ++i){// let's add a static mutex to avoid two incrementations at the same time
+        pthread_mutex_lock(&mutex);
+        x = x + 1;
+        pthread_mutex_unlock(&mutex);
+    }
+    pthread_exit(NULL);
+}
+
+int main(){
+    x = 0;
+    pthread_t threads_ids[NB_THREAD];
+    // === Creation ===
+    for(int i = 0 ; i < NB_THREAD ; ++i) 
+        if(pthread_create(threads_ids + i, NULL, (void*)increase, NULL) == 0)
+            printf("thread n°%d created with success\n", i);
+    
+    // === Running ===
+
+    // === Join ===
+
+    for(int i = 0 ; i < NB_THREAD ; i++)
+        if(pthread_join(tids[i], NULL) == 0);
+            printf("thread n°%d exited with success\n", i);
+    
+    printf("x = %d\n", x); // prints "x = NB_THREAD*LIMIT"
+    return 0;
+}
+```
+
+The main difference between threads and processes is that threads does not duplicates memory. That's why we should use some **mutex** to manage memory access. In the above example, if we don't use mutex, both threads will increment the `x` variable maybe at the same time. As the incrementation operation isn't atomic, it can be incremented twice in the same time, which will result in a single incrementation. Adding mutex allows us to make the increment operation **atomic**.
