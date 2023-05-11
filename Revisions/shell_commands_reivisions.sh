@@ -79,3 +79,39 @@ function dir_count {
     echo $nb
 }
 
+# function that prints args
+function print_args {
+    echo "executable name : $0"
+    nb=0
+    for i in $* ; do
+        echo "\$$nb = $i"
+        nb=$[ $nb + 1 ]
+    done
+    echo "\$# = $nb"
+}
+
+function arg_inversion {
+    echo "before"
+    print_args $*
+    case $# in
+    1)
+        echo "one arg";;
+    2)
+        set -- $2 $1;;
+    3) 
+        set - $3 $2 $1;;
+    4)
+        set -- $4 $3 $2 $1;;
+    5) 
+        set -- $5 $4 $3 $2 $1;;
+    6) 
+        set -- $6 $5 $4 $3 $2 $1;;
+    *)
+        echo "unknown arg";;
+    #set -- $4 $3 $2 $3 $1 $0
+    esac
+    echo "after"
+    print_args $*
+}
+
+arg_inversion $*

@@ -4,9 +4,9 @@
 function nb_execution {
     nb=0
     for i in `ls`; do
-        if [ -x $i -a -f $i ]
+        if [ -x $i -a -f $i ] #-x = executable // -a = and // -f = file (not a directory)
         then 
-            nb=$[ $nb + 1 ] ;  #-x = executable // -a = and // -f = file (not a directory)
+            nb=$[ $nb + 1 ] ; 
         fi
     done
     echo "executable file number : $nb"

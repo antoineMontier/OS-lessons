@@ -204,17 +204,15 @@ Tests can be done using bash. For example, we can test a file/directory with the
 
 Example of use : 
 ```sh
-# function that counts number of executable files in the directory
-function exec_count {
-    file_list=`ls`
-    nb=0
-    for i in $file_list; do
-        if [ -x $i -a -f $i ] ; then
-            nb=$(expr $nb \+ 1)
-        fi
-    done
-    echo $nb
-}
+#Count the number of executable files in the directory
+file_list=`ls`
+nb=0
+for i in $file_list; do
+    if [ -x $i -a -f $i ] ; then
+        nb=$(expr $nb \+ 1)
+    fi
+done
+echo $nb
 ```
 
 # C compilation
