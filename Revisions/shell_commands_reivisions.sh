@@ -12,14 +12,35 @@ function fibo {
     if(($1<=1)) ; then 
         echo $1 
     else 
-        one=$(expr $1 - 1)
-        fibo_one=$(fibo $one)
-        two=$(expr $1 - 2)
-        fibo_two=$(fibo $two)
-        calc=$(expr $fibo_one + $fibo_two)
-        echo $calc
+        echo $(expr $(fibo $(expr $1 \- 1)) + $(fibo $(expr $1 \- 2)))
     fi
 }
+
+function fibo_it {
+    if(($# != 1)) ; then
+        echo "provide 1 argument for fibo_it, you provided $#"
+    else
+        case $1 in
+        0)
+            echo 0;;
+        1)
+            echo 1;;
+        2)
+            echo 1;;
+        *)
+            a=1
+            b=0
+            c=0
+            for((i=0 ; i<$1 ; i++)) ; do
+                c=$(expr $a + $b )
+                b=$a
+                a=$c
+            done
+            echo $b
+        ;;
+        esac
+    fi
+}   
 
 function fibo_string {
     nb=$(fibo $1)
@@ -94,24 +115,19 @@ function arg_inversion {
     echo "before"
     print_args $*
     case $# in
+    0)
+        echo "no args";;
     1)
         echo "one arg";;
-    2)
-        set -- $2 $1;;
-    3) 
-        set - $3 $2 $1;;
-    4)
-        set -- $4 $3 $2 $1;;
-    5) 
-        set -- $5 $4 $3 $2 $1;;
-    6) 
-        set -- $6 $5 $4 $3 $2 $1;;
     *)
-        echo "unknown arg";;
-    #set -- $4 $3 $2 $3 $1 $0
+        echo "a" ;;
     esac
     echo "after"
     print_args $*
 }
 
-arg_inversion $*
+print_args $*
+for((i=0 ; i<=100 ; i++)) ; do
+    val=$( fibo_it $i )
+    echo "fibo($i) = $val"
+done
