@@ -120,7 +120,6 @@ int fork_search(int*arr, int size, int to_find){
 }
 
 
-
 int* rand_arr(int size){
     srand(time(NULL));
     int*res = malloc(size*sizeof(int));
