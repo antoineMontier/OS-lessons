@@ -1,49 +1,32 @@
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-1	actual 184954	father 184950
-0	actual 184959	father 184954
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-1	actual 184955	father 184951
-0	actual 184961	father 184955
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-1	actual 184952	father 184950
-0	actual 184960	father 184952
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-1	actual 184953	father 184951
-0	actual 184956	father 184953
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-1	actual 184952	father 184950
-0	actual 184962	father 184952
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-1	actual 184953	father 184951
-0	actual 184958	father 184953
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-1	actual 184952	father 184950
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-1	actual 184955	father 184951
-0	actual 184963	father 184955
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-1	actual 184953	father 184951
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-1	actual 184955	father 184951
-3	actual 184949	father 149494
-2	actual 184951	father 184949
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-1	actual 184954	father 184950
-0	actual 184957	father 184954
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-1	actual 184954	father 184950
-3	actual 184949	father 149494
-2	actual 184950	father 184949
-3	actual 184949	father 149494
+I'm the father 498761, son1 498773,     son2 498775
+I'm the father 498765, son1 498777,     son2 498779
+I'm the father 498760, son1 498763,     son2 498766
+I'm the father 498757, son1 498760,     son2 498761
+I'm the father 498770, son1 498776,     son2 498778
+I'm the father 498784, son1 498793,     son2 498796
+I'm the father 498768, son1 498772,     son2 498774
+I'm the father 498783, son1 498807,     son2 498809
+I'm the father 498782, son1 498789,     son2 498791
+I'm the father 498798, son1 498801,     son2 498804
+I'm the father 498785, son1 498792,     son2 498794
+I'm the father 498790, son1 498810,     son2 498811
+I'm the father 498786, son1 498812,     son2 498813
+I'm the father 498759, son1 498768,     son2 498770
+I'm the father 498800, son1 498803,     son2 498805
+I'm the father 498787, son1 498795,     son2 498802
+I'm the father 498754, son1 498757,     son2 498759
+I'm the father 498781, son1 498783,     son2 498787
+I'm the father 498764, son1 498786,     son2 498790
+I'm the father 498767, son1 498782,     son2 498785
+I'm the father 498771, son1 498798,     son2 498800
+I'm the father 498788, son1 498797,     son2 498799
+I'm the father 498769, son1 498806,     son2 498808
+I'm the father 498780, son1 498784,     son2 498788
+I'm the father 498762, son1 498765,     son2 498769
+I'm the father 498756, son1 498780,     son2 498781
+I'm the father 498758, son1 498762,     son2 498764
+I'm the father 498755, son1 498767,     son2 498771
+I'm the father 498752, son1 498754,     son2 498756
+I'm the father 498753, son1 498755,     son2 498758
+I'm the father 498751, son1 498752,     son2 498753
+31

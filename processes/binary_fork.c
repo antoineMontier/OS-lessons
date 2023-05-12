@@ -30,7 +30,7 @@ int binary_forking_rec(int nb, pid_t parent_pid){ // the number of processes wil
     if(nb <= 0) exit(1); // leaf    
     pid_t son1_pid, son2_pid;
     if(      (son1_pid = fork())     &&     (son2_pid = fork())    ){//father
-        //printf("I'm the father %d, son1 %d,     son2 %d\n", getpid(), son1_pid, son2_pid);
+        printf("I'm the father %d, son1 %d,     son2 %d\n", getpid(), son1_pid, son2_pid);
 
         int n, m;
         wait(&n);

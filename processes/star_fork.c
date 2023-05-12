@@ -6,9 +6,9 @@
 #include <stdlib.h>
 
 
-pid_t son1, son2, son3, son4;
 
 int main(){
+    pid_t son1, son2, son3, son4;
 
     son1 = fork();
     if(son1 > 0)
