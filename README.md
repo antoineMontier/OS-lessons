@@ -7,10 +7,10 @@
 
 ### Very general, Utilisation with every device
 
-- Windows : intuitive, Mutli-media, paying
+- Windows : intuitive, Mutli-media, playing
 - Linux : open source, secured
 - Android : open source, intuitive, secured, Multi-media
-- MacOs	: intuitive, Multi-media, paying
+- MacOs	: intuitive, Multi-media, playing
 - Unix : open source, secured
 
 ## UI spécialisés
@@ -59,7 +59,7 @@ decides which task need to be exectuted first and how to distribute the ressourc
 
 ## BIOS
 Bellow the UI<br />
-BIOS : Basic Interface Output System. It's located in the ROM (Read Only Memory)
+BIOS : **B**asic **I**nterface **O**utput **S**ystem. It's located in the ROM (Read Only Memory)
 
 ## Kernel
 just over BIOS
@@ -85,13 +85,13 @@ bash = Born Again SHell
 
 ## basic terminal shortcuts
 
-- Ctrl+C : **interruption**
-- Ctrl+Z : **suspension** ; `fg` (relaunch in foreground) ; `bg` (relaunch in background)
-- Ctrl+/ : **interruption** with a memory clean-up
-- Ctrl+S : turn **off** the screen update
-- Ctrl+Q : turn **on** the screen update
-- Ctrl+D : **kills** the entrance flux
-- Ctrl+U : **erase** the actual line
+- Ctrl+**C** : **interruption**
+- Ctrl+**Z** : **suspension** ; `fg` (relaunch in foreground) ; `bg` (relaunch in background)
+- Ctrl+**/** : **interruption** with a memory clean-up
+- Ctrl+**S** : turn **off** the screen update
+- Ctrl+**Q** : turn **on** the screen update
+- Ctrl+**D** : **kills** the entrance flux
+- Ctrl+**U** : **erase** the actual line
 
 ## commands
 
