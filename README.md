@@ -1,7 +1,7 @@
 # OS-lessons 
 
 ## User-Interface (UI) definition
-	**Interface** between resources (CPU, RAM, files...) and user
+**Interface** between resources (CPU, RAM, files...) and user
 
 ## standard UI
 
